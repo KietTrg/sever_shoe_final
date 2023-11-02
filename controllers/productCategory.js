@@ -164,12 +164,19 @@ const getCategories = asyncHandler(async (req, res) => {
 });
 const updateCategory = asyncHandler(async (req, res) => {
   const { pcid } = req.params;
-  const response = await ProductCategory.findByIdAndUpdate(pcid, req.body, {
-    new: true,
-  });
+  const files = req?.files;
+  if (files?.image) req.body.image = files?.image[0]?.path;
+
+  const updateCategory = await ProductCategory.findByIdAndUpdate(
+    pcid,
+    req.body,
+    {
+      new: true,
+    }
+  );
   return res.json({
-    success: response ? true : false,
-    updatedCategory: response ? response : "Cannot update category",
+    success: updateCategory ? true : false,
+    mes: updateCategory ? "Updated" : "Cannot update category",
   });
 });
 const deleteCategory = asyncHandler(async (req, res) => {
