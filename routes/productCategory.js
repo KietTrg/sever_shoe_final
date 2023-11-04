@@ -10,7 +10,12 @@ router.post(
   ctrls.creatCategory
 );
 router.get("/", ctrls.getCategories);
-router.put("/:pcid", [verifyAccessToken, isAdmin], ctrls.updateCategory);
+router.put(
+  "/:pcid",
+  [verifyAccessToken, isAdmin],
+  uploader.fields([{ name: "image", maxCount: 1 }]),
+  ctrls.updateCategory
+);
 router.delete("/:pcid", [verifyAccessToken, isAdmin], ctrls.deleteCategory);
 
 module.exports = router;

@@ -164,12 +164,16 @@ const getCategories = asyncHandler(async (req, res) => {
 });
 const updateCategory = asyncHandler(async (req, res) => {
   const { pcid } = req.params;
+
   const files = req?.files;
+  req.body.brand = req.body.brand.slice(1);
   if (files?.image) req.body.image = files?.image[0]?.path;
 
   const updateCategory = await ProductCategory.findByIdAndUpdate(
     pcid,
-    req.body,
+    {
+      ...req.body,
+    },
     {
       new: true,
     }
