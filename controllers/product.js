@@ -220,8 +220,8 @@ const addVarriant = asyncHandler(async (req, res) => {
   const { pid } = req.params;
   const { title, price, color, size } = req.body;
   req.body.size = size.slice(1); ////new
-  console.log(" req.body.size: ", req.body.size);
-  console.log(size);
+  // console.log(" req.body.size: ", req.body.size);
+  // console.log(size);
   const thumb = req?.files?.thumb[0]?.path;
   const images = req?.files?.images?.map((el) => el.path);
   if (!(title && price && color && size)) throw new Error("Missing input");
