@@ -148,6 +148,44 @@ const updateProduct = asyncHandler(async (req, res) => {
     mes: updatedProduct ? "Updated" : "Cannot updated product",
   });
 });
+
+const updateQuantityProduct = asyncHandler(async (req, res) => {
+  const { pid } = req.params;
+
+  const { quantity } = req.body;
+
+  const currentProduct = await Product.findById(pid);
+
+  const currentQuantity = currentProduct.quantity;
+
+  const updatedQuatityProduct = await Product.findByIdAndUpdate(
+    pid,
+    { quantity: currentQuantity - quantity },
+    {
+      new: true,
+    }
+  );
+  return res.status(200).json("ok");
+});
+const updateSoldProduct = asyncHandler(async (req, res) => {
+  const { pid } = req.params;
+
+  const { sold } = req.body;
+
+  const currentProduct = await Product.findById(pid);
+
+  const currentQuantity = currentProduct.sold;
+
+  const updatedQuatityProduct = await Product.findByIdAndUpdate(
+    pid,
+    { sold: currentQuantity + sold },
+    {
+      new: true,
+    }
+  );
+  return res.status(200).json("ok");
+});
+
 const deleteProduct = asyncHandler(async (req, res) => {
   const { pid } = req.params;
   const deletedProduct = await Product.findByIdAndDelete(pid);
@@ -258,4 +296,6 @@ module.exports = {
   ratings,
   uploadImagesProduct,
   addVarriant,
+  updateQuantityProduct,
+  updateSoldProduct,
 };

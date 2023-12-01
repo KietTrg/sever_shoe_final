@@ -30,6 +30,18 @@ router.put(
   ctrls.addVarriant
 );
 router.put(
+  "/quantity/:pid",
+  [verifyAccessToken],
+
+  ctrls.updateQuantityProduct
+);
+router.put(
+  "/sold/:pid",
+  [verifyAccessToken],
+
+  ctrls.updateSoldProduct
+);
+router.put(
   "/:pid",
   [verifyAccessToken, isAdmin],
   uploader.fields([
