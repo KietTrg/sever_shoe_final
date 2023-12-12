@@ -77,7 +77,7 @@ var userSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-
+//băm pass
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
