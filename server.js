@@ -10,8 +10,8 @@ const cors = require("cors");
 const app = express(); //tạo app
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
-    methods: ["POST", "PUT", "GET", "DELETE"],
+    origin: "*",
+    // methods: ["POST", "PUT", "GET", "DELETE"],
     credentials: true,
   })
 );
